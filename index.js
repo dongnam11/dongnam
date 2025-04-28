@@ -57,20 +57,21 @@ async function handleMessage(userId, userMessage, replyToken) {
 
 async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-    model: "anthropic/claude-3-haiku-20240307", // 🔥 Model miễn phí, rất giỏi tiếng Nhật
+    model: "anthropic/claude-3-haiku-20240307",
     messages: [
       { role: "user", content: text }
     ]
   }, {
     headers: {
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json'
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://yourdomain.com', // Bắt buộc
+      'OpenRouter-Referer': 'https://yourdomain.com' // Bắt buộc
     }
   });
 
   return response.data.choices[0].message.content.trim();
 }
-
 async function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku-20240307",
@@ -80,8 +81,10 @@ async function translateToJapanese(text) {
     ]
   }, {
     headers: {
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json'
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://yourdomain.com',
+      'OpenRouter-Referer': 'https://yourdomain.com'
     }
   });
 
