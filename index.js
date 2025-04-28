@@ -75,7 +75,7 @@ async function chatWithKaiwa(text) {
 
 async function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-    model: "anthropic/claude-3-haiku-20240307",
+    model: "anthropic/claude-3-haiku",
     messages: [
       { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật, sử dụng ngôn ngữ tự nhiên và lịch sự:\n\n"${text}"` }
     ]
