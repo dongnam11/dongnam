@@ -57,13 +57,13 @@ async function handleMessage(userId, userMessage, replyToken) {
 
 async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-    model: "anthropic/claude-3-haiku-20240307",
+    model: "anthropic/claude-3-haiku", // ✅ sửa lại model
     messages: [
-      { role: "user", content: `Hãy trả lời bằng tiếng Nhật cho câu hỏi sau, ngắn gọn và tự nhiên:\n\n"${text}"` }
+      { role: "user", content: `Hãy trả lời bằng tiếng Nhật: ${text}` }
     ]
   }, {
     headers: {
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': 'https://openrouter.ai',
       'OpenRouter-Referer': 'https://openrouter.ai'
@@ -73,15 +73,15 @@ async function chatWithKaiwa(text) {
   return response.data.choices[0].message.content.trim();
 }
 
-async function translateToJapanese(text) {
+aasync function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-    model: "anthropic/claude-3-haiku",
+    model: "anthropic/claude-3-haiku", // ✅ sửa lại model
     messages: [
-      { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật, sử dụng ngôn ngữ tự nhiên và lịch sự:\n\n"${text}"` }
+      { role: "user", content: `Dịch câu sau từ tiếng Việt sang tiếng Nhật một cách tự nhiên và lịch sự:\n\n"${text}"` }
     ]
   }, {
     headers: {
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': 'https://openrouter.ai',
       'OpenRouter-Referer': 'https://openrouter.ai'
