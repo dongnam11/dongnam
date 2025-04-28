@@ -61,8 +61,8 @@ async function chatWithKaiwa(text) {
     messages: [
       { role: "user", content: `Hãy trả lời câu hỏi sau:\n\n"${text}"\n\nsao cho tự nhiên, ngắn gọn, giống người Nhật nhất bằng tiếng Nhật.` }
     ],
-    max_tokens: 300,
-    temperature: 0.6
+    max_tokens: 100,
+    temperature: 0.5
   }, {
     headers: {
       'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
@@ -81,8 +81,8 @@ async function translateToJapanese(text) {
     messages: [
       { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật sao cho tự nhiên và lịch sự:\n\n"${text}"` }
     ],
-    max_tokens: 300,
-    temperature: 0.6
+    max_tokens: 100,
+    temperature: 0.5
   }, {
     headers: {
       'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
