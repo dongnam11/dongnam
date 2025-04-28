@@ -1,4 +1,4 @@
-require('dotenv').config();
+いこｎrequire('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
@@ -59,7 +59,7 @@ async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku",
     messages: [
-      { role: "user", content: `あなたは日本人です。日常会話が成立できるように、自然にこのメッセージに返事してください。:\n\n"${text}"\n\n .  ` }
+      { role: "user", content: `あなたは日本人です。日常会話が成立できるように、自然にこのメッセージに返事してください。:\n\n"${text}"\n\n アイコンを使ってもいいです。.  ` }
     ],
     max_tokens: 100,
     temperature: 0.5
