@@ -55,7 +55,7 @@ async function handleMessage(userId, userMessage, replyToken) {
   }
 }
 
-aasync function chatWithKaiwa(text) {
+async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku",
     messages: [
@@ -65,7 +65,7 @@ aasync function chatWithKaiwa(text) {
     temperature: 0.7
   }, {
     headers: {
-      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': 'https://openrouter.ai',
       'OpenRouter-Referer': 'https://openrouter.ai'
@@ -75,16 +75,17 @@ aasync function chatWithKaiwa(text) {
   return response.data.choices[0].message.content.trim();
 }
 
-
-aasync function translateToJapanese(text) {
+async function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-    model: "anthropic/claude-3-haiku", // ✅ sửa lại model
+    model: "anthropic/claude-3-haiku",
     messages: [
-      { role: "user", content: `Dịch câu sau từ tiếng Việt sang tiếng Nhật một cách tự nhiên và lịch sự:\n\n"${text}"` }
-    ]
+      { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật sao cho tự nhiên và lịch sự:\n\n"${text}"` }
+    ],
+    max_tokens: 200,
+    temperature: 0.7
   }, {
     headers: {
-      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': 'https://openrouter.ai',
       'OpenRouter-Referer': 'https://openrouter.ai'
