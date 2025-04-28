@@ -59,7 +59,7 @@ async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku",
     messages: [
-      { role: "user", content: `Hãy trả lời câu hỏi sau:\n\n"${text}"\n\nsao cho tự nhiên, ngắn gọn, giống người Nhật nhất bằng tiếng Nhật. Hãy thêm phần phiên âm bằng hiragana. Nếu có giải thích thì bằng Tiếng Việt.` }
+      { role: "user", content: `Hãy trả lời câu hỏi sau:\n\n"${text}"\n\nsao cho tự nhiên, ngắn gọn, giống người Nhật nhất bằng tiếng Nhật và có thể đặt câu hỏi ngược lại. Hãy thêm phần phiên âm bằng hiragana. ` }
     ],
     max_tokens: 100,
     temperature: 0.5
