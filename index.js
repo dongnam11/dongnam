@@ -59,7 +59,7 @@ async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku",
     messages: [
-      { role: "user", content: `Hãy trả lời câu hỏi sau:\n\n"${text}"\n\nsao cho tự nhiên, ngắn gọn, giống người Nhật nhất bằng tiếng Nhật.` }
+      { role: "user", content: `Hãy trả lời câu hỏi sau:\n\n"${text}"\n\nsao cho tự nhiên, ngắn gọn, giống người Nhật nhất bằng tiếng Nhật. Hãy thêm phần phiên âm bằng hiragana. Nếu có giải thích thì bằng Tiếng Việt.` }
     ],
     max_tokens: 100,
     temperature: 0.5
@@ -79,7 +79,7 @@ async function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku",
     messages: [
-      { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật sao cho tự nhiên và lịch sự:\n\n"${text}"` }
+      { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật sao cho tự nhiên và lịch sự. Thêm phần phiên âm sang hiragana.:\n\n"${text}"` }
     ],
     max_tokens: 100,
     temperature: 0.5
