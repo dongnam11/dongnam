@@ -61,8 +61,8 @@ async function chatWithKaiwa(text) {
     messages: [
       { role: "user", content: `あなたは日本人です。日常会話が成立できるように、短く、簡潔に、自然にこのメッセージに返事してください。私と会話練習をしてください。:\n\n"${text}"\n\n。.  ` }
     ],
-    max_tokens: 100,
-    temperature: 0.5
+    max_tokens: 150,
+    temperature: 0.4
   }, {
     headers: {
       'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
