@@ -57,9 +57,10 @@ async function handleMessage(userId, userMessage, replyToken) {
 
 async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-    model: "anthropic/claude-3-haiku", // ✅ sửa lại model
+    model: "anthropic/claude-3-haiku",
     messages: [
-      { role: "user", content: `Hãy trả lời bằng tiếng Nhật sao cho ngắn gọn, tự nhiên như người Nhật :\n\n" ${text}"` }
+      { role: "system", content: "Bạn là một người Nhật Bản, hãy trả lời tin nhắn ngắn gọn, tự nhiên và lịch sự bằng tiếng Nhật giống người Nhật." },
+      { role: "user", content: text }
     ]
   }, {
     headers: {
@@ -72,6 +73,7 @@ async function chatWithKaiwa(text) {
 
   return response.data.choices[0].message.content.trim();
 }
+
 
 aasync function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
