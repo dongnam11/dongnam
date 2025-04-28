@@ -50,8 +50,8 @@ async function handleMessage(userId, userMessage, replyToken) {
 
     await replyUser(replyToken, replyText);
   } catch (error) {
-    console.error("❌ Lỗi khi xử lý:", error.message);
-    await replyUser(replyToken, "⚠️ Xin lỗi, bot gặp lỗi. Vui lòng thử lại sau.");
+    console.error("❌ Lỗi khi xử lý:", error.response?.data || error.message);
+    await replyUser(replyToken, "⚠️ Xin lỗi, bot đang bận. Vui lòng thử lại sau.");
   }
 }
 
@@ -59,32 +59,32 @@ async function chatWithKaiwa(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku-20240307",
     messages: [
-      { role: "user", content: text }
+      { role: "user", content: `Hãy trả lời bằng tiếng Nhật cho câu hỏi sau, ngắn gọn và tự nhiên:\n\n"${text}"` }
     ]
   }, {
     headers: {
-      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://yourdomain.com', // Bắt buộc
-      'OpenRouter-Referer': 'https://yourdomain.com' // Bắt buộc
+      'HTTP-Referer': 'https://openrouter.ai',
+      'OpenRouter-Referer': 'https://openrouter.ai'
     }
   });
 
   return response.data.choices[0].message.content.trim();
 }
+
 async function translateToJapanese(text) {
   const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
     model: "anthropic/claude-3-haiku-20240307",
     messages: [
-      { role: "system", content: "Dịch nội dung người dùng nhập từ tiếng Việt sang tiếng Nhật. Dùng ngôn ngữ tự nhiên và lịch sự." },
-      { role: "user", content: text }
+      { role: "user", content: `Hãy dịch câu sau từ tiếng Việt sang tiếng Nhật, sử dụng ngôn ngữ tự nhiên và lịch sự:\n\n"${text}"` }
     ]
   }, {
     headers: {
-      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://yourdomain.com',
-      'OpenRouter-Referer': 'https://yourdomain.com'
+      'HTTP-Referer': 'https://openrouter.ai',
+      'OpenRouter-Referer': 'https://openrouter.ai'
     }
   });
 
